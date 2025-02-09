@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.util.SocketUtils;
+
 import interfaces.IProveedor;
 import model.TblProveedorcl2;
 
@@ -19,14 +21,20 @@ public class ProveedorDAO implements IProveedor {
 		EntityManager em = emf.createEntityManager();
 		// iniciamos la transaccion
 		em.getTransaction().begin();
-		// registramos
-		em.persist(tblproveedor);
-		// emitimos mensaje por pantalla....
-		System.out.println("Proveedor registrado en BD correctamente!!!!!!!!");
-		// confirmamos
-		em.getTransaction().commit();
-		// cerramos la transaccion...
-		em.close();
+		try {
+			// registramos
+			em.persist(tblproveedor);
+			// emitimos mensaje por pantalla....
+			System.out.println("Proveedor registrado en BD correctamente!!!!!!!!");
+			// confirmamos
+			em.getTransaction().commit();
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			// cerramos la transaccion...
+			em.close();
+		}
+
 	}
 
 	@Override
@@ -34,13 +42,14 @@ public class ProveedorDAO implements IProveedor {
 		// TODO Auto-generated method stub
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("LPII_CL2_RodriguezPeredaVicente");
 		EntityManager em = emf.createEntityManager();
-
+		System.out.println("ACTUALIZAR PROVEEDOR ACA");
 		try {
 			em.getTransaction().begin();
 			em.merge(tblproveedor);
 			em.getTransaction().commit();
 		} catch (RuntimeException e) {
-			e.getMessage();
+			System.out.println(e.getMessage()); 
+			
 		} finally {
 			em.close();
 		}

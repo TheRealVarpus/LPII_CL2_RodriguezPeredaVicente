@@ -68,7 +68,7 @@
             <% String error = (String)request.getAttribute("error");
                
             if (error != null) { %>
-               <p><%= error %></p>
+               <p><%=error %></p>
             <% } %>
         </div>
     </div>

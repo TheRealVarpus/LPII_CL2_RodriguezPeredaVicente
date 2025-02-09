@@ -66,7 +66,7 @@ input[type="text"], input[type="email"], input[type="date"] {
 
     <div class="container">
         <h2>Registro de Proveedores</h2>
-        <form action="RegistrarProveedorServlet" method="post">
+        <form action="ProveedorControlador?accion=guardarNuevo" method="post">
             <table>
                 <tr>
                     <td>Nombre:</td>
@@ -85,11 +85,7 @@ input[type="text"], input[type="email"], input[type="date"] {
                     <td>Email:</td>
                     <td><input type="email" name="email" required></td>
                 </tr>
-                <tr>
-                    <td>Fecha de Ingreso:</td>
-                    <td><input type="date" name="fechaIngreso"
-						required></td>
-                </tr>
+               
                 <tr>
                     <td colspan="2" style="text-align: center;">
                         <button type="submit" class="btn">Registrar Proveedor</button>
